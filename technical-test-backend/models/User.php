@@ -16,7 +16,19 @@ class User extends ActiveRecord
         return [
             [['name', 'birthday'], 'required'],
             ['name', 'string', 'max' => 255],
-            ['birthday', 'date', 'format' => 'yyyy-MM-dd']
+            ['name', 'match', 'pattern' => '/^[a-zA-Z\s\-\']+$/'],
+            ['birthday', 'date', 'format' => 'php:Y-m-d'],
+            ['birthday', 'validateBirthday']
         ];
     }
+
+    public function validateBirthday($attribute, $params)
+{
+    $today = new \DateTime();
+    $birthday = new \DateTime($this->$attribute);
+
+    if ($birthday > $today) {
+        $this->addError($attribute, 'Birthday cannot be in the future');
+    }
+}
 }
