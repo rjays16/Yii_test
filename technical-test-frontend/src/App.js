@@ -19,7 +19,7 @@ function App() {
 
   return (
     <Container className="app-container">
-      <h1 className="text-center my-4">User Management System</h1>
+      <h1 className="text-center my-4">List of Users</h1>
       
       <Button 
         variant="primary" 
